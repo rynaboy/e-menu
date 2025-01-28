@@ -173,6 +173,7 @@ export default function Home( ) {
                       key={item.id}
                       cartItem={item}
                       isOrderPage={isOrderPage}
+                      cur={cur}
                     />
                   ))}
                 </div>
