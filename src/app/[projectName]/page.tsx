@@ -21,6 +21,7 @@ export default function Home( ) {
   const isOrderPage = false; // Flag for order page
   const [images, setImages] = useState<any[]>([])
   const [isNotFound, setNotFound] = useState(false)
+  const [cur, setCur] = useState(null);
 
 
   const imgUrl = `https://${projectName}.tsdsolution.net/assets/uploads/`;
@@ -35,6 +36,7 @@ export default function Home( ) {
         const correctedSlideShow = data.slide_Show.replace(/,\s*]$/, ']');
         const slideShowArray = JSON.parse(correctedSlideShow);
         setImages(slideShowArray);
+        setCur(data.symbol);
         // Handle the fetched data here
       } catch (err) {
         console.log("Error fetching data", err);
