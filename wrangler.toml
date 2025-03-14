@@ -1,2 +1,3 @@
-main = "src/app/[projectName]/page.tsx"
+main = "./next.config.js"
 compatibility_date = "2025-03-14"
+
