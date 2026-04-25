@@ -59,7 +59,7 @@ export default function Cart({ cartItem, isOrderPage , cur }: PropType) {
        <button onClick={handleOrder} className="w-full h-full ">
         <img
           className="object-cover w-full h-[200px]"
-          src={`https://pos.tsdsolution.net/pos-client-system/778_wash_brew/storage/uploads/p8pNiD2tv5jcgE24.jpg`}
+          src={`https://pos.tsdsolution.net/pos-client-system/778_wash_brew/storage/uploads/`+imageUrl}
           alt={cartItem.name}
           width={250}
           height={250}
