@@ -1,7 +1,6 @@
 import React from 'react';
-import Image from 'next/image';
 import numeral from "numeral";
-import { useParams } from 'next/navigation';
+import { ASSETS_BASE } from '@/lib/api';
 import { orderHistory } from '@/types/model';
 
 type PropsType = {
@@ -10,14 +9,13 @@ type PropsType = {
 };
 
 export default function HistoryOrder({ cartItem , cur}: PropsType) {
-    const { projectName, tableNumber } = useParams();
-    const { name, price, id , imagePath, quantity, promo_price,  } = cartItem;
+    const { name, price, id , image, imagePath, quantity, promo_price,  } = cartItem;
     // Format prices
     const real_price = numeral(promo_price).format('0.00');
     const actual_price = numeral(price).format('0.00');
     const qty = numeral(quantity).format('0')
     // Construct image URL
-    const imgUrl = `https://${projectName}.tsdsolution.net/assets/uploads/`;
+    const imageUrl = image ?? imagePath ?? '';
 
     return (
         <>
@@ -26,7 +24,7 @@ export default function HistoryOrder({ cartItem , cur}: PropsType) {
                 <div className='flex flex-row items-center space-x-4'>
                     {/* Image */}
                     <div className='h-[62px] w-[62px] rounded-lg overflow-hidden'>
-                        <img src={`${imgUrl}/${imagePath}`} alt="" width={1000} height={1000} className="object-cover w-full h-full" />
+                        <img src={imageUrl} alt={name} width={1000} height={1000} className="object-cover w-full h-full" />
                     </div>
                     {/* Item details (name, price, promo_price) */}
                     <div>

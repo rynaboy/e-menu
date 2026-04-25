@@ -8,7 +8,8 @@ interface MetaDataType  {
 interface Menu {
   id: string; // Unique identifier for the menu item
   name: string; // Name of the menu item
-  imagePath: string; // Path to the image of the menu item
+  image?: string; // Full URL to the image of the menu item
+  imagePath?: string; // Path to the image of the menu item
   price: number; // Regular price of the menu item
   promo_price: number; // Promotional price of the menu item
   code: number; // Code associated with the menu item
@@ -28,7 +29,8 @@ type MenuType = Category[];
 interface CartItem {
   id: string; // Unique identifier for the cart item
   name: string; // Name of the cart item
-  imagePath: string; // Path to the image of the cart item
+  image?: string; // Full URL to the image of the cart item
+  imagePath?: string; // Path to the image of the cart item
   quantity: number; // Quantity of the cart item
   price: number; // Regular price of the cart item
   promo_price: number; // Promotional price of the cart item
@@ -50,7 +52,8 @@ interface orderHistory {
   code: string; // Code associated with the order item
   comment: string; // Comment associated with the order item
   id: string; // Unique identifier for the order item
-  imagePath: string; // Path to the image of the order item
+  image?: string; // Full URL to the image of the order item
+  imagePath?: string; // Path to the image of the order item
   name: string; // Name of the order item
   price: number; // Regular price of the order item
   promo_price: number; // Promotional price of the order item

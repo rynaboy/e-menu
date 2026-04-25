@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Logo } from '@/components';
 import InforCard from '../InfoCard';
 import axios from 'axios';
-import { useParams } from 'next/navigation';
+import { API_BASE, ASSETS_BASE } from '@/lib/api';
 
 interface PropType {
   title: string;
@@ -13,11 +13,10 @@ interface PropType {
 
 export default function NavBar() {
   const [metadata, setMetadata] = useState<PropType | undefined>();
-  const {projectName} = useParams()
   useEffect(() => {
     const fetchMetadata = async () => {
       try {
-        const response = await axios.get(`https://${projectName}.tsdsolution.net/api/DriverController/setting`);
+        const response = await axios.get(`${API_BASE}/api/emenu/settings`);
         const data = response.data;
         // Set metadata state with fetched data
         setMetadata({ title: data.site_name, icons: data.logo });
@@ -29,13 +28,13 @@ export default function NavBar() {
     };
 
     fetchMetadata();
-  }, [projectName]);
+  }, []);
 
   return (
     <nav className='bg-white p-1 px-3 flex flex-row justify-between items-center pb-0 z-10 max-w-[575px] w-full '>
       {/* Logo and Title Section */}
       <div className='flex flex-row items-center space-x-2'>
-        <Logo className={"max-[600px]:h-6 h-10"} image={`https://${projectName}.tsdsolution.net/assets/uploads/logos/${metadata?.icons}`} />
+        <Logo className={"max-[600px]:h-6 h-10"} image={`${ASSETS_BASE}/logos/${metadata?.icons}`} />
         <div>
           <p className='font-extrabold w-30 font-akbalthom-moul-4 text-xl max-[600px]:text-sm max-[450px]:text-[14px]'>{metadata?.title}</p>
         </div>

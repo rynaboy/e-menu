@@ -9,6 +9,7 @@ import HistoryOrder from "./HistoryOrder";
 import numeral from "numeral";
 import { useParams } from "next/navigation";
 import axios from "axios";
+import { API_BASE } from "@/lib/api";
 import { orderHistoryType } from "@/types/model";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -16,15 +17,14 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function OrderItem({cur}:any) {
   const [historyOrder, setHistoryOrder] = useState<orderHistoryType | null>(null)
-  const {projectName, tableNumber}= useParams()
+  const { tableNumber } = useParams()
   const [isLoading, setIsLoading] = useState(false);
 
   const [isClickOrder, setClickOrder] = useState(false)
   const cart = useSelector((state: RootState)=> state.cart)
-  const endPoint = `https://${projectName}.tsdsolution.net/api/DriverController/suspends`
+  const endPoint = `${API_BASE}/api/DriverController/suspends`
   // Fetch history order details on component mount
   useEffect(() => {
-      console.log(projectName)
       const fetchHistoryOrder = async () => {
           try {
               const formData = new FormData();
@@ -40,7 +40,7 @@ export default function OrderItem({cur}:any) {
       };
 
       fetchHistoryOrder();
-  }, [projectName, tableNumber, isClickOrder]); // Ensure useEffect dependencies are correct
+  }, [tableNumber, isClickOrder]); // Ensure useEffect dependencies are correct
 
   const dispatch = useDispatch()
   
@@ -73,7 +73,7 @@ export default function OrderItem({cur}:any) {
       };
       const jsonData = JSON.stringify(data)
       const response = await axios.post(
-        `https://${projectName}.tsdsolution.net/api/DriverController/suspend`,
+        `${API_BASE}/api/DriverController/suspend`,
         jsonData,
         {
           headers: {

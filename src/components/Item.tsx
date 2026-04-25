@@ -2,8 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { updateCartItem, removeFromCart } from '@/lib/cart/cartSlice'; // Adjust the path as per your project structure
 import { CartItem } from '@/types/model'; // Adjust the path as per your project structure
-import Image from 'next/image';
-import { useParams } from 'next/navigation';
+import { ASSETS_BASE } from '@/lib/api';
 import numeral from 'numeral';
 type PropsType = {
     cartItem: CartItem;
@@ -14,11 +13,10 @@ export default function Item({ cartItem, cur }: PropsType) {
     console.log(cur);
     
     
-    const {projectName} = useParams()
-    const {name, price, promo_price,id, imagePath, quantity}= cartItem
+    const { name, price, promo_price, id, image, imagePath, quantity } = cartItem
     const real_price = numeral(promo_price).format('0.00')
     const actual_price = numeral(price).format('0.00')
-  const imgUrl = `https://${projectName}.tsdsolution.net/assets/uploads/`
+    const imageUrl = image ?? imagePath ?? ''
     const dispatch = useDispatch();
     const handleQuantityChange = (newQuantity: number) => {
         if(newQuantity > 0){
@@ -38,7 +36,7 @@ export default function Item({ cartItem, cur }: PropsType) {
                 <div className='flex flex-row items-center space-x-4 '>
                     {/* img box  */}
                     <div className='h-[62px] w-[62px] rounded-lg overflow-hidden '>
-                        <img src={`${imgUrl}/${imagePath}`} alt="" width={250} height={250} className="object-cover w-full h-full" />
+                        <img src={imageUrl} alt={name} width={250} height={250} className="object-cover w-full h-full" />
                     </div>
                     {/* item info (name, price, promo_price)  */}
                     <div>

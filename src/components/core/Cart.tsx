@@ -1,12 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
-import "@/app/globals.css";
 import { Menu } from "@/types/model";
 import { addToCart } from "@/lib/cart/cartSlice";
 import { RootState } from "@/lib/store";
-import { useParams } from "next/navigation";
+import { ASSETS_BASE } from "@/lib/api";
 import numeral from "numeral";
 
 type PropType = {
@@ -17,11 +15,11 @@ type PropType = {
 
 
 export default function Cart({ cartItem, isOrderPage , cur }: PropType) {
-  const { id, name, imagePath, price, promo_price, code, type } = cartItem;
+  const { id, name, image, imagePath, price, promo_price, code, type } = cartItem;
   const real_price = numeral(promo_price).format("0.00");
   const actual_price = numeral(price).format("0.00");
+  const imageUrl = image ?? imagePath ?? "";
 
-  const { projectName } = useParams();
   const dispatch = useDispatch();
   const cart = useSelector((state: RootState) => state.cart);
 
@@ -30,7 +28,7 @@ export default function Cart({ cartItem, isOrderPage , cur }: PropType) {
   const currentQuantity = existingCartItem ? existingCartItem.quantity : 0;
   const [eachItemOrderNumber, setOrderItem] = useState(currentQuantity);
   // Base URL for image
-  const imgUrl = `https://${projectName}.tsdsolution.net/assets/uploads/`;
+  // const imgUrl = `${ASSETS_BASE}/`;
 
   // Handle adding item to cart
   const handleOrder = () => {
@@ -38,7 +36,7 @@ export default function Cart({ cartItem, isOrderPage , cur }: PropType) {
     const cartData = {
       id,
       name,
-      imagePath,
+      image,
       price,
       quantity: eachItemOrderNumber + 1,
       promo_price,
@@ -61,7 +59,7 @@ export default function Cart({ cartItem, isOrderPage , cur }: PropType) {
        <button onClick={handleOrder} className="w-full h-full ">
         <img
           className="object-cover w-full h-[200px]"
-          src={`${imgUrl}${cartItem.imagePath}`}
+          src={`https://pos.tsdsolution.net/pos-client-system/778_wash_brew/storage/uploads/p8pNiD2tv5jcgE24.jpg`}
           alt={cartItem.name}
           width={250}
           height={250}

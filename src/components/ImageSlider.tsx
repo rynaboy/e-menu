@@ -1,23 +1,18 @@
 // components/ImageSlider.tsx
-import React, { useEffect, useState }  from 'react';
+import React from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import Image from 'next/image';
-import { useParams } from 'next/navigation';
-import axios from 'axios';
+import { ASSETS_BASE } from '@/lib/api';
 
 type propsType = {
   images: any[]
 }
 
-
 const ImageSlider = ({images}: propsType) => {
-  const  {projectName} = useParams()
- 
-  const imgUrl = `https://${projectName}.tsdsolution.net/assets/uploads/`;
+  const imgUrl = `${ASSETS_BASE}/`;
  
   return (
     <Swiper

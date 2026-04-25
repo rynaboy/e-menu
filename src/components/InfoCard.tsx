@@ -1,8 +1,7 @@
-import Image from "next/image";
 import React, { ReactNode, useEffect, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
-import { useParams } from "next/navigation";
+import { API_BASE, ASSETS_BASE } from "@/lib/api";
 
 
 
@@ -14,11 +13,10 @@ type propTypes = {
 export default function InforCard({ children, title, logo }: propTypes) {
   const [info, setInfo] = useState<any>()
   const [icons, setIcons] = useState<any>()
-  const {projectName} = useParams()
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://${projectName}.tsdsolution.net/api/DriverController/e_orderConfig`);
+        const response = await axios.get(``);
         const data = response.data;
         setInfo(data);
         console.log("fetch icons",data);
@@ -43,9 +41,9 @@ export default function InforCard({ children, title, logo }: propTypes) {
           </form>
           <div className="flex flex-col  items-center ">
               <div className="h-[200px] w-full bg-red-400 mb-20 relative">
-                <img src={`https://${projectName}.tsdsolution.net/assets/uploads/logos/${info?.hero}`}  className="object-cover w-full h-full " width={10000} height={10000} alt="" />
+                <img src={`${ASSETS_BASE}/logos/${info?.hero}`}  className="object-cover w-full h-full " width={10000} height={10000} alt="" />
                 <div className={"w-28 h-28 rounded-full flex justify-center items-center absolute  bottom-[-60px]  bg-white left-1/2 transform -translate-x-1/2"}>
-                <img className="object-cover " src={`https://${projectName}.tsdsolution.net/assets/uploads/logos/${logo}`}  alt="" width={1000} height={1000} />
+                <img className="object-cover " src={`${ASSETS_BASE}/logos/${logo}`}  alt="" width={1000} height={1000} />
                   </div>                
               </div>
               <p className="font-akbalthom-moul-4 text-center text-2xl ">{title}</p>
