@@ -34,7 +34,7 @@ export default function NavBar() {
     <nav className='bg-white p-1 px-3 flex flex-row justify-between items-center pb-0 z-10 max-w-[575px] w-full '>
       {/* Logo and Title Section */}
       <div className='flex flex-row items-center space-x-2'>
-        <Logo className={"max-[600px]:h-6 h-10"} image={`${ASSETS_BASE}/logos/${metadata?.icons}`} />
+        {/* <Logo className={"max-[600px]:h-6 h-10"} image={`${ASSETS_BASE}/logos/${metadata?.icons}`} /> */}
         <div>
           <p className='font-extrabold w-30 font-akbalthom-moul-4 text-xl max-[600px]:text-sm max-[450px]:text-[14px]'>{metadata?.title}</p>
         </div>
